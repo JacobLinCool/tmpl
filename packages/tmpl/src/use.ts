@@ -62,7 +62,7 @@ export async function use(
 					message: `File "${dest}" already exists, overwrite?`,
 				});
 				if (!overwrite) {
-					throw new Error(`File "${dest}" already exists`);
+					continue;
 				}
 			} else {
 				throw new Error(`File "${dest}" already exists`);
