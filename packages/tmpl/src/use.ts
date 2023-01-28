@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import chalk from "chalk";
 import inquirer from "inquirer";
+import type { Ora } from "ora";
 import { peek } from "./peek";
 import { storage } from "./storage";
 import * as variable from "./variable";
@@ -14,6 +15,7 @@ export async function use(
 		interactive = false,
 		overwrite = false,
 		variables = {} as Record<string, string>,
+		spinner = undefined as Ora | undefined,
 	} = {},
 ): Promise<void> {
 	const { files, vars } = await peek(name, tag);
@@ -75,7 +77,9 @@ export async function use(
 		}
 
 		fs.copyFileSync(src, dest);
+		spinner?.succeed(`Write file ${chalk.greenBright(dests[i])}`);
 	}
 
 	variable.replace(dests, variables, { dir });
+	spinner?.succeed("All variables replaced");
 }

@@ -1,5 +1,6 @@
 import { Command } from "commander";
 import inquirer from "inquirer";
+import ora from "ora";
 import { list } from "@/list";
 import { use } from "@/use";
 import { fatal } from "@/utils";
@@ -68,9 +69,11 @@ export const command = new Command("use")
 			tag = t;
 		}
 
-		await use(name, tag, { dir: opt.dir, variables, interactive: true }).catch((err) =>
+		const spinner = ora();
+		await use(name, tag, { dir: opt.dir, variables, interactive: true, spinner }).catch((err) =>
 			fatal(err, console.error),
 		);
+		spinner.succeed("Template used successfully");
 	});
 
 export default command;
