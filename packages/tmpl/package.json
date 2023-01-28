@@ -1,0 +1,39 @@
+{
+	"name": "@jacoblincool/tmpl",
+	"description": "Jacob's Project Templating Tool.",
+	"version": "1.0.0",
+	"author": "JacobLinCool <jacoblincool@gmail.com> (https://jacoblin.cool)",
+	"license": "MIT",
+	"keywords": [
+		"template"
+	],
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"bin": {
+		"tmpl": "dist/tmpl.js"
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"start": "node dist/tmpl.js",
+		"build": "tsup",
+		"build:docs": "typedoc --out docs src"
+	},
+	"dependencies": {
+		"chalk": "^4.1.2",
+		"commander": "^10.0.0",
+		"controlled-fs": "^2.3.1",
+		"debug": "^4.3.4",
+		"globby": "^11.1.0",
+		"inquirer": "^8.2.5",
+		"ora": "^5.4.1"
+	},
+	"devDependencies": {
+		"@types/debug": "^4.1.7",
+		"@types/inquirer": "^9.0.3",
+		"tsup": "^6.5.0",
+		"typedoc": "^0.23.24",
+		"typescript": "^4.9.4"
+	}
+}
