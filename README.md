@@ -22,6 +22,8 @@ pnpm i -g @jacoblincool/tmpl
 
 It is intended to be an interactive tool, but it can be used in a non-interactive way.
 
+![](https://raw.githubusercontent.com/JacobLinCool/tmpl/main/screenshots/help.gif)
+
 > Use `tmpl --help` / `tmpl <command> --help` to see all the options.
 
 ### Make new template
@@ -34,6 +36,7 @@ tmpl make
 
 It will prompt you for a name and do the rest for you.
 
+![](https://raw.githubusercontent.com/JacobLinCool/tmpl/main/screenshots/make.gif)
 
 #### Template variables
 
@@ -57,6 +60,8 @@ It will give you a list of templates to choose from and do the rest for you.
 
 If there are any files that already exist, it will prompt you to overwrite them or not.
 
+![](https://raw.githubusercontent.com/JacobLinCool/tmpl/main/screenshots/use.gif)
+
 ### List templates
 
 It will give you a list of existing templates.
@@ -64,6 +69,8 @@ It will give you a list of existing templates.
 ```sh
 tmpl list
 ```
+
+![](https://raw.githubusercontent.com/JacobLinCool/tmpl/main/screenshots/list.gif)
 
 ### Peek template
 
@@ -74,6 +81,8 @@ tmpl list
 ```
 
 It will show you the file structure and variables of the template.
+
+![](https://raw.githubusercontent.com/JacobLinCool/tmpl/main/screenshots/peek.gif)
 
 ### Import template
 
@@ -87,8 +96,10 @@ tmpl import
 
 It will prompt you for a remote repository URL and a (local) name for the template.
 
+![](https://raw.githubusercontent.com/JacobLinCool/tmpl/main/screenshots/import.gif)
+
 ## API Usage
 
 It can also be used as a library.
 
-See the documentation for more information.
+See the [documentation](https://jacoblin.cool/tmpl) for more information.
