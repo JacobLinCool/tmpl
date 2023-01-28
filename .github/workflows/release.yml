@@ -33,7 +33,7 @@ jobs:
               id: changesets
               uses: changesets/action@v1
               with:
-                  publish: pnpm publish -r --verbose --access public --no-git-checks
+                  publish: pnpm changeset publish
                   version: pnpm changeset version
                   title: Release Packages
               env:
