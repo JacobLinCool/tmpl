@@ -5,6 +5,7 @@ import inquirer from "inquirer";
 import type { Ora } from "ora";
 import { peek } from "./peek";
 import { storage } from "./storage";
+import { tree_to_list } from "./utils";
 import * as variable from "./variable";
 
 export async function use(
@@ -35,21 +36,7 @@ export async function use(
 		}
 	}
 
-	const dests: string[] = [];
-
-	function walk(dir: Record<string, unknown>, target: string) {
-		for (const file in dir) {
-			const next = path.join(target, file);
-
-			if (dir[file] === true) {
-				dests.push(next);
-			} else {
-				walk(dir[file] as Record<string, unknown>, next);
-			}
-		}
-	}
-
-	walk(files, "");
+	const dests = tree_to_list(files);
 
 	const src_dir = storage.local[name].$path;
 	for (let i = 0; i < dests.length; i++) {

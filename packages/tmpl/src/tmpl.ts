@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { program } from "commander";
 import { pkg } from "@/core";
+import edit from "@cli/edit";
 import import_remote from "@cli/import";
 import list from "@cli/list";
 import make from "@cli/make";
@@ -16,4 +17,5 @@ program
 	.addCommand(peek)
 	.addCommand(remove)
 	.addCommand(import_remote)
+	.addCommand(edit)
 	.parse();

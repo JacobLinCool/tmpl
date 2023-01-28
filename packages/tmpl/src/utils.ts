@@ -1,4 +1,6 @@
 import { execSync } from "node:child_process";
+import path from "node:path";
+import type { Dir } from "./peek";
 
 export function check_git(): void {
 	const ok = gitact()("version").startsWith("git version");
@@ -34,4 +36,24 @@ export function fatal<T = any>(err: unknown, cb?: (msg: string) => void): T {
 		console.error(err);
 	}
 	process.exit(1);
+}
+
+export function tree_to_list(root: Dir): string[] {
+	const files: string[] = [];
+
+	function walk(dir: Record<string, unknown>, target: string) {
+		for (const file in dir) {
+			const next = path.join(target, file);
+
+			if (dir[file] === true) {
+				files.push(next);
+			} else {
+				walk(dir[file] as Record<string, unknown>, next);
+			}
+		}
+	}
+
+	walk(root, "");
+
+	return files;
 }
