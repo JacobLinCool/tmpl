@@ -1,0 +1,5 @@
+I am a $#VAR#$.
+
+I am another $#VAR#$.
+
+I am not a $#VAR#$, but I am a $#V_A_R#$.
