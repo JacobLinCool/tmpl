@@ -21,7 +21,7 @@ export function gitact(opt?: { cwd?: string }): (...args: string[]) => string {
 				encoding: "utf8",
 				cwd,
 				env,
-				stdio: ["ignore", "pipe", "ignore"],
+				stdio: ["ignore", "pipe", "pipe"],
 			}).trim();
 		} catch (err) {
 			throw new Error(`[${cwd}] git ${cmd} failed: ${err}`);
