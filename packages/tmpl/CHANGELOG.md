@@ -1,5 +1,11 @@
 # @jacoblincool/tmpl
 
+## 1.2.2
+
+### Patch Changes
+
+-   [#4](https://github.com/JacobLinCool/tmpl/pull/4) [`d9c198e`](https://github.com/JacobLinCool/tmpl/commit/d9c198e151be0e8b88b295d147ec38d7152d2eb7) Thanks [@JacobLinCool](https://github.com/JacobLinCool)! - Fast fail `edit`, `peek`, `remove`, and `use` command if there is no template available
+
 ## 1.2.1
 
 ### Patch Changes
