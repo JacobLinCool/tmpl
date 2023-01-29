@@ -1,3 +1,4 @@
+import { execSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -8,6 +9,18 @@ import { remove } from "../src/remove";
 import { use } from "../src/use";
 
 const dir = path.join(__dirname, "fixtures", "template");
+
+// if git author is not set, set it
+try {
+	execSync("git config --global user.name");
+} catch {
+	execSync("git config --global user.name test");
+}
+try {
+	execSync("git config --global user.email");
+} catch {
+	execSync("git config --global user.email test@example.com");
+}
 
 describe("template without tag", () => {
 	test("make", async () => {
