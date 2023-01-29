@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { Command } from "commander";
 import inquirer from "inquirer";
 import ora from "ora";
@@ -14,6 +15,17 @@ export const command = new Command("use")
 	.option("-v:<name>, --var:<name> <value>", "set the variable to use")
 	.allowUnknownOption(true)
 	.action(async (name: string, tag: string, opt: { dir?: string }, cmd) => {
+		const templates = Object.keys(await list());
+
+		if (templates.length === 0) {
+			ora().fail(
+				`There is no template to use, try ${chalk.yellowBright(
+					"tmpl make",
+				)} or ${chalk.yellowBright("tmpl import")} to add one first`,
+			);
+			return;
+		}
+
 		const args: string[] = cmd.args;
 		const skips = new Set<number>();
 
@@ -49,7 +61,7 @@ export const command = new Command("use")
 					type: "list",
 					name: "name",
 					message: "Template name",
-					choices: Object.keys(await list()),
+					choices: templates,
 					validate: validation.name,
 				},
 			]);
