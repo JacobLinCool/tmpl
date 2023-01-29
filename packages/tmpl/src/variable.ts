@@ -11,7 +11,7 @@ export function scan(
 		skip = (stats: Stats & { path: string }) => stats.size > 256 * KB,
 	} = {},
 ): Record<string, string[]> {
-	const variables: Record<string, string[]> = {};
+	const variables: Record<string, Set<string>> = {};
 
 	files.forEach((file) => {
 		const src = path.join(dir, file);
@@ -25,14 +25,16 @@ export function scan(
 		if (matches?.length) {
 			for (const match of matches) {
 				if (!variables[match]) {
-					variables[match] = [];
+					variables[match] = new Set();
 				}
-				variables[match].push(file);
+				variables[match].add(file);
 			}
 		}
 	});
 
-	return variables;
+	return Object.fromEntries(
+		Object.entries(variables).map(([key, value]) => [key, [...value].sort()]),
+	);
 }
 
 export function replace(
