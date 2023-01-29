@@ -16,13 +16,24 @@ export const command = new Command("edit")
 	.argument("[tag]", "template tag", "")
 	.description("edit a template")
 	.action(async (name: string, tag: string) => {
+		const templates = Object.keys(await list());
+
+		if (templates.length === 0) {
+			ora().fail(
+				`There is no template to edit, try ${chalk.yellowBright(
+					"tmpl make",
+				)} or ${chalk.yellowBright("tmpl import")} to add one first`,
+			);
+			return;
+		}
+
 		if (!name || validation.name(name) !== true) {
 			const { name: n } = await inquirer.prompt([
 				{
 					type: "list",
 					name: "name",
 					message: "Template name",
-					choices: Object.keys(await list()),
+					choices: templates,
 					validate: validation.name,
 				},
 			]);
