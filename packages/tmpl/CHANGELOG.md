@@ -1,5 +1,15 @@
 # @jacoblincool/tmpl
 
+## 1.4.0
+
+### Minor Changes
+
+-   [#8](https://github.com/JacobLinCool/tmpl/pull/8) [`cc5b6e5`](https://github.com/JacobLinCool/tmpl/commit/cc5b6e5eb4b3cf898e9e7f443587ebf4b9350c8a) Thanks [@JacobLinCool](https://github.com/JacobLinCool)! - Add update function / command to update remote templates
+
+### Patch Changes
+
+-   [#8](https://github.com/JacobLinCool/tmpl/pull/8) [`2599dcb`](https://github.com/JacobLinCool/tmpl/commit/2599dcbdc1f2bf6e1dc938e6d15b6f283d81bb58) Thanks [@JacobLinCool](https://github.com/JacobLinCool)! - Show URL of remote template when listing
+
 ## 1.3.0
 
 ### Minor Changes
