@@ -50,7 +50,7 @@ describe("template without tag", () => {
 	test("list", async () => {
 		const templates = await list();
 		expect(templates).toEqual({
-			test: [],
+			test: { tags: [] },
 		});
 	});
 
@@ -105,7 +105,7 @@ describe("template with tag", () => {
 	test("list", async () => {
 		const templates = await list();
 		expect(templates).toEqual({
-			test: [tag],
+			test: { tags: [tag] },
 		});
 	});
 
@@ -127,7 +127,7 @@ describe("template with tag", () => {
 		await remove("test", tag);
 		const templates = await list();
 		expect(templates).toEqual({
-			test: [],
+			test: { tags: [] },
 		});
 	});
 });
