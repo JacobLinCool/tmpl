@@ -5,6 +5,7 @@ export * from "./make";
 export * from "./peek";
 export * from "./remove";
 export * from "./storage";
+export * from "./update";
 export * from "./use";
 export * as variable from "./variable";
 export * as validation from "./validation";

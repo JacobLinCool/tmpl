@@ -5,7 +5,6 @@ import chalk from "chalk";
 import { Command } from "commander";
 import inquirer from "inquirer";
 import ora from "ora";
-import { list } from "@/list";
 import { peek } from "@/peek";
 import { storage } from "@/storage";
 import { fatal, tree_to_list } from "@/utils";
@@ -16,7 +15,7 @@ export const command = new Command("edit")
 	.argument("[tag]", "template tag", "")
 	.description("edit a template")
 	.action(async (name: string, tag: string) => {
-		const templates = Object.keys(await list());
+		const templates = storage.local.$list();
 
 		if (templates.length === 0) {
 			ora().fail(

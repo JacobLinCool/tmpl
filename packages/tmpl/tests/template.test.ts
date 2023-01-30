@@ -2,10 +2,12 @@ import { execSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { import as import_remote } from "../src/import";
 import { list } from "../src/list";
 import { make } from "../src/make";
 import { peek } from "../src/peek";
 import { remove } from "../src/remove";
+import { update } from "../src/update";
 import { use } from "../src/use";
 
 const dir = path.join(__dirname, "fixtures", "template");
@@ -50,7 +52,7 @@ describe("template without tag", () => {
 	test("list", async () => {
 		const templates = await list();
 		expect(templates).toEqual({
-			test: [],
+			test: { tags: [] },
 		});
 	});
 
@@ -72,6 +74,25 @@ describe("template without tag", () => {
 		await remove("test");
 		const templates = await list();
 		expect(templates).toEqual({});
+	});
+
+	test("import & update", async () => {
+		const vars1 = await import_remote(
+			"imported",
+			"https://github.com/JacobLinCool/ts-library-template.git",
+		);
+		const templates = await list();
+		expect(templates).toEqual({
+			imported: {
+				tags: [],
+				remote: "https://github.com/JacobLinCool/ts-library-template.git",
+			},
+		});
+
+		const vars2 = await update("imported");
+		expect(vars1).toEqual(vars2);
+
+		await remove("imported");
 	});
 });
 
@@ -105,7 +126,7 @@ describe("template with tag", () => {
 	test("list", async () => {
 		const templates = await list();
 		expect(templates).toEqual({
-			test: [tag],
+			test: { tags: [tag] },
 		});
 	});
 
@@ -127,7 +148,7 @@ describe("template with tag", () => {
 		await remove("test", tag);
 		const templates = await list();
 		expect(templates).toEqual({
-			test: [],
+			test: { tags: [] },
 		});
 	});
 });

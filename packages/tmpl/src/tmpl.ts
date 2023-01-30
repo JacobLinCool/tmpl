@@ -7,6 +7,7 @@ import list from "@cli/list";
 import make from "@cli/make";
 import peek from "@cli/peek";
 import remove from "@cli/remove";
+import update from "@cli/update";
 import use from "@cli/use";
 
 program
@@ -18,4 +19,5 @@ program
 	.addCommand(remove)
 	.addCommand(import_remote)
 	.addCommand(edit)
+	.addCommand(update)
 	.parse();
