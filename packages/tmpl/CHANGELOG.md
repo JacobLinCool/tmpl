@@ -1,5 +1,15 @@
 # @jacoblincool/tmpl
 
+## 1.3.0
+
+### Minor Changes
+
+-   [#6](https://github.com/JacobLinCool/tmpl/pull/6) [`9216be2`](https://github.com/JacobLinCool/tmpl/commit/9216be2e069fe3103bcf4953088fc6917ea69876) Thanks [@JacobLinCool](https://github.com/JacobLinCool)! - Add `always` ask strategy (ask to write file one by one) to `use`
+
+### Patch Changes
+
+-   [#6](https://github.com/JacobLinCool/tmpl/pull/6) [`014c870`](https://github.com/JacobLinCool/tmpl/commit/014c8706e87cef4117b4eb528ba88b1bcbe28328) Thanks [@JacobLinCool](https://github.com/JacobLinCool)! - Change file path in overwrite prompt from absolute path to relative path
+
 ## 1.2.2
 
 ### Patch Changes
