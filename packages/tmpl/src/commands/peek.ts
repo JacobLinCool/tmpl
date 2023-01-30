@@ -6,6 +6,7 @@ import ora from "ora";
 import { list } from "@/list";
 import { peek } from "@/peek";
 import type { Dir } from "@/peek";
+import { storage } from "@/storage";
 import { fatal } from "@/utils";
 import * as validation from "@/validation";
 
@@ -14,7 +15,7 @@ export const command = new Command("peek")
 	.argument("[name]", "template name", "")
 	.argument("[tag]", "template tag", "")
 	.action(async (name: string, tag: string) => {
-		const templates = Object.keys(await list());
+		const templates = storage.local.$list();
 
 		if (templates.length === 0) {
 			ora().fail(

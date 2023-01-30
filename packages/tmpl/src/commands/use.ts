@@ -3,6 +3,7 @@ import { Command } from "commander";
 import inquirer from "inquirer";
 import ora from "ora";
 import { list } from "@/list";
+import { storage } from "@/storage";
 import { use } from "@/use";
 import { fatal } from "@/utils";
 import * as validation from "@/validation";
@@ -16,7 +17,7 @@ export const command = new Command("use")
 	.option("-v:<name>, --var:<name> <value>", "set the variable to use")
 	.allowUnknownOption(true)
 	.action(async (name: string, tag: string, opt: { dir?: string; ask: string }, cmd) => {
-		const templates = Object.keys(await list());
+		const templates = storage.local.$list();
 
 		if (templates.length === 0) {
 			ora().fail(
