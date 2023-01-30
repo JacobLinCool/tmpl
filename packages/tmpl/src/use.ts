@@ -65,7 +65,7 @@ export async function use(
 				const { overwrite } = await inquirer.prompt({
 					type: "confirm",
 					name: "overwrite",
-					message: `File "${dest}" already exists, overwrite?`,
+					message: `File "${dests[i]}" already exists, overwrite?`,
 				});
 				if (!overwrite) {
 					continue;
