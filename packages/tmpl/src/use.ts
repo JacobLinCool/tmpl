@@ -17,6 +17,7 @@ export async function use(
 		overwrite = false,
 		variables = {} as Record<string, string>,
 		spinner = undefined as Ora | undefined,
+		ask = "overwrite" as "overwrite" | "always",
 	} = {},
 ): Promise<void> {
 	const { files, vars } = await peek(name, tag);
@@ -39,16 +40,32 @@ export async function use(
 	const dests = tree_to_list(files);
 
 	const src_dir = storage.local[name].$path;
+	const padding = Math.log10(dests.length) + 1;
 	for (let i = 0; i < dests.length; i++) {
 		const dest = path.join(dir, dests[i]);
 		const src = path.join(src_dir, dests[i]);
 
-		if (fs.existsSync(dest) && !overwrite) {
+		const safe = overwrite || !fs.existsSync(dest);
+
+		if (safe) {
+			if (ask === "always") {
+				const { write } = await inquirer.prompt({
+					type: "confirm",
+					name: "write",
+					message: `[${(i + 1).toString().padStart(padding)} / ${dests.length}] Write "${
+						dests[i]
+					}"?`,
+				});
+				if (!write) {
+					continue;
+				}
+			}
+		} else {
 			if (interactive) {
 				const { overwrite } = await inquirer.prompt({
 					type: "confirm",
 					name: "overwrite",
-					message: `File "${dest}" already exists, overwrite?`,
+					message: `File "${dests[i]}" already exists, overwrite?`,
 				});
 				if (!overwrite) {
 					continue;
@@ -64,7 +81,11 @@ export async function use(
 		}
 
 		fs.copyFileSync(src, dest);
-		spinner?.succeed(`Write file ${chalk.greenBright(dests[i])}`);
+		spinner?.succeed(
+			`${(((i + 1) / dests.length) * 100)
+				.toFixed(1)
+				.padStart(5)}% | Write file ${chalk.greenBright(dests[i])}`,
+		);
 	}
 
 	variable.replace(dests, variables, { dir });

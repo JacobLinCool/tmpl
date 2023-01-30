@@ -48,6 +48,9 @@ export function replace(
 ): void {
 	files.forEach((file) => {
 		const src = path.join(dir, file);
+		if (!fs.existsSync(src)) {
+			return;
+		}
 
 		if (skip({ ...fs.statSync(src), path: src })) {
 			return;

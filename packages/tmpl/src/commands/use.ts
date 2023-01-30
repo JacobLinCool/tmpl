@@ -12,9 +12,10 @@ export const command = new Command("use")
 	.argument("[tag]", "template tag", "")
 	.description("use a template")
 	.option("-d, --dir <dir>", "directory to use to")
+	.option("-a, --ask <strategy>", "ask strategy (overwrite or always)", "overwrite")
 	.option("-v:<name>, --var:<name> <value>", "set the variable to use")
 	.allowUnknownOption(true)
-	.action(async (name: string, tag: string, opt: { dir?: string }, cmd) => {
+	.action(async (name: string, tag: string, opt: { dir?: string; ask: string }, cmd) => {
 		const templates = Object.keys(await list());
 
 		if (templates.length === 0) {
@@ -82,9 +83,13 @@ export const command = new Command("use")
 		}
 
 		const spinner = ora();
-		await use(name, tag, { dir: opt.dir, variables, interactive: true, spinner }).catch((err) =>
-			fatal(err, console.error),
-		);
+		await use(name, tag, {
+			dir: opt.dir,
+			variables,
+			interactive: true,
+			spinner,
+			ask: opt.ask === "always" ? "always" : "overwrite",
+		}).catch((err) => fatal(err, console.error));
 		spinner.succeed("Template used successfully");
 	});
 
